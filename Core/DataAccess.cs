@@ -60,7 +60,7 @@ namespace Core
         }
         public static void AddAuthor(Author a)
         {
-            connection.Query($"insert into [dbo].[Author] (Surname, Name, BirthDate, DeathDate) values ('{a.Surname}', '{a.Name}', {a.BirthDate}, {a.DeathDate})");
+            connection.Query($"insert into [dbo].[Author] (Surname, Name) values ('{a.Surname}', '{a.Name}')");
         }
         public static void DeleteBook(int id)
         {

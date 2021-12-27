@@ -81,8 +81,6 @@ namespace ConsoleInterface
                         {
                             Surname = args[2],
                             Name = args[3],
-                            BirthDate = Convert.ToDateTime(args[4]),
-                            DeathDate = Convert.ToDateTime(args[5]),
                         }
                     );
                     break;
@@ -132,7 +130,7 @@ namespace ConsoleInterface
                     break;
                 case "author":
                     var a = DataAccess.GetAuthor(Convert.ToInt32(args[2]));
-                    Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name} {a.BirthDate} {a.DeathDate}");
+                    Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name}");
                     break;
             }
         }
@@ -158,7 +156,7 @@ namespace ConsoleInterface
                     break;
                 case "authors":
                     foreach (var a in DataAccess.GetAllAuthors())
-                        Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name} {a.BirthDate} {a.DeathDate}");
+                        Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name}");
                     break;
                 //case "food":
                 //    foreach (var f in FoodStorage.GetFood())
