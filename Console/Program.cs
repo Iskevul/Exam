@@ -52,8 +52,8 @@ namespace ConsoleInterface
                     Add(arguments);
                     break;
                 case "get":
-            //        Get(arguments);
-            //        break;
+                    Get(arguments);
+                    break;
                 case "getall":
                     GetAll(arguments);
                     break;
@@ -109,19 +109,39 @@ namespace ConsoleInterface
                     break;
             }
         }
-        //private static void Get(string[] args)
-        //{
-        //    switch (args[1])
-        //    {
-        //        case "book":
-        //    }
-        //}
+        private static void Get(string[] args)
+        {
+            switch (args[1])
+            {
+                case "book":
+                    var b = DataAccess.GetBook(Convert.ToInt32(args[2]));
+                    Console.WriteLine($"{b.ID_Book} {b.Name} " +
+                        $"{DataAccess.connection.Query<Author>(@$"select Surname, Name 
+                                                                    from Author   
+                                                                    where ID_Author = {b.ID_Author}").FirstOrDefault().Surname} " +
+                        $"{DataAccess.connection.Query<Department>(@$"select Name 
+                                                                    from Department   
+                                                                    where ID_Department = {b.ID_Department}").FirstOrDefault().Name} " +
+                        $"{b.Quantity}"
+                             );
+                    
+                    break;
+                case "department":
+                    var d = DataAccess.GetDepartment(Convert.ToInt32(args[2]));
+                    Console.WriteLine($"{d.ID_Department} {d.Name}");
+                    break;
+                case "author":
+                    var a = DataAccess.GetAuthor(Convert.ToInt32(args[2]));
+                    Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name} {a.BirthDate} {a.DeathDate}");
+                    break;
+            }
+        }
         private static void GetAll(string[] args)
         {
             switch (args[1])
             {
                 case "books":
-                    foreach (var a in DataAccess.GetBooks())
+                    foreach (var a in DataAccess.GetAllBooks())
                         Console.WriteLine($"{a.ID_Book} {a.Name} " +
                             $"{DataAccess.connection.Query<Author>(@$"select Surname, Name 
                                                                       from Author   
@@ -133,11 +153,11 @@ namespace ConsoleInterface
                              );
                     break;
                 case "departments":
-                    foreach (var a in DataAccess.GetDepartments())
+                    foreach (var a in DataAccess.GetAllDepartments())
                         Console.WriteLine($"{a.ID_Department} {a.Name}");
                     break;
                 case "authors":
-                    foreach (var a in DataAccess.GetAuthors())
+                    foreach (var a in DataAccess.GetAllAuthors())
                         Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name} {a.BirthDate} {a.DeathDate}");
                     break;
                 //case "food":

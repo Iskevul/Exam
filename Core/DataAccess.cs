@@ -14,27 +14,53 @@ namespace Core
     {
         private static string connStr = ConfigurationManager.ConnectionStrings["LibraryDB"].ConnectionString;
         public static IDbConnection connection = new SqlConnection(connStr);
-        public static List<Book> GetBooks()
+        public static List<Book> GetAllBooks()
         {
-            try
-            {
-                return connection.Query<Book>("select * from Book").AsList();
-            }
-            catch
-            {return null;}
+            try { return connection.Query<Book>("select * from Book").AsList(); }
+            catch { return null; }
         }
         public static List<Book> GetMyBooks()
         {
-            try
-            {
-                return connection.Query<Book>("select * from Book where [ID_Book] IN (select ID_Book from Ticket)").AsList();
-            }
-            catch
-            { return null; }
+            try { return connection.Query<Book>("select * from Book where [ID_Book] IN (select ID_Book from Ticket)").AsList(); }
+            catch { return null; }
+        }
+        public static List<Department> GetAllDepartments()
+        {
+            try { return connection.Query<Department>("select * from Department").AsList(); }
+            catch { return null; }
+        }
+        public static List<Author> GetAllAuthors()
+        {
+            try { return connection.Query<Author>("select * from Author").AsList(); }
+            catch { return null; }
+        }
+        public static Book GetBook(int id)
+        {
+            try { return connection.Query<Book>($"select * from Book where ID_Book = {id}").FirstOrDefault(); }
+            catch { return null; }
+        }
+        public static Author GetAuthor(int id)
+        {
+            try { return connection.Query<Author>($"select * from Author where ID_Author = {id}").FirstOrDefault(); }
+            catch { return null; }
+        }
+        public static Department GetDepartment(int id)
+        {
+            try { return connection.Query<Department>($"select * from Department where ID_Department = {id}").FirstOrDefault(); }
+            catch { return null; }
+        }
+
+        public static void AddDepartment(Department d)
+        {
+            connection.Query($"insert into [dbo].[Department] (Name) values ('{d.Name}')");
         }
         public static void AddBook(Book b)
         {
             connection.Query($"insert into [dbo].[Book] (Name, Year, ID_Author, ID_Department, Quantity) values ('{b.Name}', {b.Year}, {b.ID_Author}, {b.ID_Department}, {b.Quantity})");
+        }
+        public static void AddAuthor(Author a)
+        {
+            connection.Query($"insert into [dbo].[Author] (Surname, Name, BirthDate, DeathDate) values ('{a.Surname}', '{a.Name}', {a.BirthDate}, {a.DeathDate})");
         }
         public static void DeleteBook(int id)
         {
@@ -61,36 +87,6 @@ namespace Core
         {
             connection.Query($"delete from [dbo].[Ticket] where [ID_Book] = {id}");
             connection.Query($"update [dbo].[Book] set [Quantity] = (select Quantity from Book where ID_Book = {id}) + 1");
-        }
-
-        public static List<Department> GetDepartments()
-        {
-            try
-            {
-                return connection.Query<Department>("select * from Department").AsList();
-            }
-            catch
-            {return null;}
-        }
-
-        public static void AddDepartment(Department d)
-        {
-            connection.Query($"insert into [dbo].[Department] (Name) values ('{d.Name}')");
-        }
-
-        public static List<Author> GetAuthors()
-        {
-            try
-            {
-                return connection.Query<Author>("select * from Author").AsList();
-            }
-            catch
-            { return null; }
-        }
-
-        public static void AddAuthor(Author a)
-        {
-            connection.Query($"insert into [dbo].[Author] (Surname, Name, BirthDate, DeathDate) values ('{a.Surname}', '{a.Name}', {a.BirthDate}, {a.DeathDate})");
         }
     }
 }
