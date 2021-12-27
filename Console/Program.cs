@@ -13,26 +13,6 @@ namespace ConsoleInterface
 {
     class Program
     {
-        //static void Main(string[] args)
-        //{
-        //    var b = new Book();
-        //    b.Name = "Скотный двор";
-        //    b.Year = 1945;
-        //    b.ID_Author = 2;
-        //    b.ID_Department = 2;
-        //    b.Quantity = 10;
-        //
-        //    DataAccess.AddBook(b);
-        //
-        //
-        //    foreach (var i in DataAccess.GetBooks())
-        //    {
-        //        Console.WriteLine(i.ID_Book + " " + i.Name);
-        //    }
-        //
-        //
-        //}
-
         static void Main(string[] args)
         {
             while (true)
@@ -158,24 +138,6 @@ namespace ConsoleInterface
                     foreach (var a in DataAccess.GetAllAuthors())
                         Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name}");
                     break;
-                //case "food":
-                //    foreach (var f in FoodStorage.GetFood())
-                //        Console.WriteLine($"{f.FoodID} {f.FoodName} {f.Weight}");
-                //    break;
-                //case "animal":
-                //    Console.WriteLine(AviaryStorage.GetAnimal(int.Parse(args[2])).Name);
-                //    break;
-                //case "homelessanimals":
-                //    foreach (var a in AviaryStorage.GetHomelessAnimals())
-                //        Console.WriteLine($"{a.AnimalID} {a.Name}");
-                //    break;
-                //case "diets":
-                //    foreach (var d in FoodStorage.GetDiets(new Animal()
-                //    {
-                //        AnimalID = int.Parse(args[2])
-                //    }))
-                //        Console.WriteLine($"{d.AnimalID} {d.Date} {d.FoodID} {d.Weight}");
-                //    break;
                 default:
                     Console.WriteLine($"Unknown command");
                     break;
