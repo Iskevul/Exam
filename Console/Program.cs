@@ -12,7 +12,7 @@ using Core;
 namespace ConsoleInterface
 {
     class Program
-    {
+    { // Ввод данных не корректный требует изменения кода
         static void Main(string[] args)
         {
             while (true)
@@ -50,7 +50,7 @@ namespace ConsoleInterface
 
         }
 
-        private static void Add(string[] args)
+        private static void Add(string[] args) // Хорошо
         {
             switch (args[1])
             {
@@ -131,11 +131,11 @@ namespace ConsoleInterface
                              );
                     break;
                 case "departments":
-                    foreach (var a in DataAccess.GetAllDepartments())
+                    foreach (var a in DataAccess.GetAllDepartments()) //Переменная Не соответствует code convention
                         Console.WriteLine($"{a.ID_Department} {a.Name}");
                     break;
                 case "authors":
-                    foreach (var a in DataAccess.GetAllAuthors())
+                    foreach (var a in DataAccess.GetAllAuthors()) //Переменная Не соответствует code convention
                         Console.WriteLine($"{a.ID_Author} {a.Surname} {a.Name}");
                     break;
                 default:

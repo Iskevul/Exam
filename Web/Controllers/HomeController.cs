@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web.Models;
-
+//Ненужные библиотеки
+// Нет проекта
 namespace Web.Controllers
 {
     public class HomeController : Controller
